@@ -40,5 +40,10 @@ userSchema.pre("save", async function (next) {
   }
 });
 
+// password comparison middleware for user
+userSchema.methods.comparePassword = async function (password, hashedPassword) {
+  return await bcrypt.compare(password, hashedPassword);
+};
+
 const User = mongoose.model("user", userSchema);
 export default User;
